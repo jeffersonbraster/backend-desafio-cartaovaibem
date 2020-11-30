@@ -11,9 +11,6 @@ export default class User {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column()
-  avatar: string;
-
   @Column({ length: 100 })
   name: string;
 
