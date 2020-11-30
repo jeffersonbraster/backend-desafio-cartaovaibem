@@ -23,7 +23,7 @@ export default class CreateEstabelecimentoService {
 
     //Verifica se foi passado o usuário ao criar um estab
     if (!user_id) {
-      throw new Error("sem id");
+      throw new Error("sem id do usuário");
     }
 
     //Cria estabelecimento

@@ -8,8 +8,10 @@ import {
   JoinColumn,
 } from "typeorm";
 
+import User from "./User";
+
 @Entity("estabelecimento")
-export default class User {
+export default class Estabelecimentos {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
