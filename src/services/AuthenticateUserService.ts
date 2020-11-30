@@ -7,7 +7,7 @@ import User from "../models/User";
 
 interface Request {
   email: string;
-  senha: string;
+  password: string;
 }
 
 interface Response {
@@ -16,7 +16,7 @@ interface Response {
 }
 
 export default class AuthenticateService {
-  public async execute({ email, senha }: Request): Promise<Response> {
+  public async execute({ email, password }: Request): Promise<Response> {
     const userRepository = getRepository(User);
 
     const user = await userRepository.findOne({ where: { email } });
@@ -27,7 +27,7 @@ export default class AuthenticateService {
 
     // verificar se a senha que o user digitar está igual a do crypt
 
-    const senhaVerificada = await compare(senha, user.password);
+    const senhaVerificada = await compare(password, user.password);
 
     if (!senhaVerificada) {
       throw new Error("Email/password incorreto");
