@@ -2,10 +2,26 @@ import { Router } from "express";
 //import { getCustomRepository } from "typeorm";
 
 import CreateEstabelecimentoService from "../services/CreateEstabelecimentoService";
+import DeleteEstabelecimentoService from "../services/DeleteEstabalecimentosService";
+import ListInstitutionService from "../services/ListEstabelecimentos";
 import UpdateEstabelecimentosService from "../services/UpdateEstabelecimentosService";
 //import EstabelecimentoRepository from "../repositories/EstabelecimentoRepository";
 
 const estabelecimentoRouter = Router();
+
+estabelecimentoRouter.get("/", async (request, response) => {
+  try {
+    //const user_id = request.user.id;
+
+    const liskEstabService = new ListInstitutionService();
+
+    const list = await liskEstabService.execute();
+
+    return response.json(list);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 estabelecimentoRouter.post("/", async (request, response) => {
   try {
@@ -45,6 +61,22 @@ estabelecimentoRouter.put("/:id", async (request, response) => {
     });
 
     return response.json(estab);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+estabelecimentoRouter.delete("/:id", async (request, response) => {
+  try {
+    const { id } = request.params;
+
+    const estabelecimentoDelete = new DeleteEstabelecimentoService();
+
+    await estabelecimentoDelete.execute({
+      id,
+    });
+
+    return response.json();
   } catch (error) {
     console.error(error);
   }
