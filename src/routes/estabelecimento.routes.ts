@@ -3,21 +3,34 @@ import { Router } from "express";
 
 import CreateEstabelecimentoService from "../services/CreateEstabelecimentoService";
 import DeleteEstabelecimentoService from "../services/DeleteEstabalecimentosService";
-import ListInstitutionService from "../services/ListEstabelecimentos";
+import ListEstabelecimentosService from "../services/ListEstabelecimentos";
+import ListFilterEstabelecimentosService from "../services/ListFilterEstabelecimentos";
 import UpdateEstabelecimentosService from "../services/UpdateEstabelecimentosService";
-//import EstabelecimentoRepository from "../repositories/EstabelecimentoRepository";
 
 const estabelecimentoRouter = Router();
 
 estabelecimentoRouter.get("/", async (request, response) => {
   try {
-    //const user_id = request.user.id;
-
-    const liskEstabService = new ListInstitutionService();
+    const liskEstabService = new ListEstabelecimentosService();
 
     const list = await liskEstabService.execute();
 
     return response.json(list);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+estabelecimentoRouter.get("/filter", async (request, response) => {
+  try {
+    const { city } = request.query;
+    const liskEstabService = new ListFilterEstabelecimentosService();
+
+    const listFilter = await liskEstabService.execute({
+      city: String(city),
+    });
+
+    return response.json(listFilter);
   } catch (error) {
     console.error(error);
   }

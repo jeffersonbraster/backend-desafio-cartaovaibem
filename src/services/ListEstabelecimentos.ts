@@ -2,7 +2,7 @@ import { getRepository } from "typeorm";
 
 import Estabelecimentos from "../models/Estabelecimentos";
 
-export default class ListInstitutionService {
+export default class ListEstabelecimentosService {
   public async execute(): Promise<Estabelecimentos[]> {
     const estabelecimentosRepository = getRepository(Estabelecimentos);
 
