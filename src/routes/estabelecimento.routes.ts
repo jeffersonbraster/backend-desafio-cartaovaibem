@@ -7,6 +7,7 @@ import ListEstabelecimentosService from "../services/ListEstabelecimentos";
 import ListFilterEstabelecimentosService from "../services/ListFilterEstabelecimentos";
 import ListIdEstabelecimento from "../services/ListIdEstabelecimento";
 import UpdateEstabelecimentosService from "../services/UpdateEstabelecimentosService";
+import ensureAuthenticaded from "../middlewares/ensureAuthenticated";
 
 const estabelecimentoRouter = Router();
 
@@ -21,7 +22,7 @@ estabelecimentoRouter.get("/", async (request, response) => {
     console.error(error);
   }
 });
-
+estabelecimentoRouter.use(ensureAuthenticaded);
 estabelecimentoRouter.get("/:id", async (request, response) => {
   try {
     const { id } = request.params;
