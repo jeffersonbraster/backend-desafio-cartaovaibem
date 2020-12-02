@@ -5,6 +5,7 @@ import CreateEstabelecimentoService from "../services/CreateEstabelecimentoServi
 import DeleteEstabelecimentoService from "../services/DeleteEstabalecimentosService";
 import ListEstabelecimentosService from "../services/ListEstabelecimentos";
 import ListFilterEstabelecimentosService from "../services/ListFilterEstabelecimentos";
+import ListIdEstabelecimento from "../services/ListIdEstabelecimento";
 import UpdateEstabelecimentosService from "../services/UpdateEstabelecimentosService";
 
 const estabelecimentoRouter = Router();
@@ -16,6 +17,22 @@ estabelecimentoRouter.get("/", async (request, response) => {
     const list = await liskEstabService.execute();
 
     return response.json(list);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+estabelecimentoRouter.get("/:id", async (request, response) => {
+  try {
+    const { id } = request.params;
+
+    const estabelecimentoId = new ListIdEstabelecimento();
+
+    const estab = await estabelecimentoId.execute({
+      id,
+    });
+
+    return response.json(estab);
   } catch (error) {
     console.error(error);
   }
